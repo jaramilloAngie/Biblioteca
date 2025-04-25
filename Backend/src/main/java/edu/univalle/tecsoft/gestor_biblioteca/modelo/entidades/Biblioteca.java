@@ -36,11 +36,6 @@ public class Biblioteca {
     @OneToMany(mappedBy = "biblioteca")
     private List<InventarioLibro> inventarios;
 
-    @ManyToMany
-    @JoinTable(
-            name = "Usuario_Biblioteca",
-            joinColumns = @JoinColumn(name = "id_biblioteca"),
-            inverseJoinColumns = @JoinColumn(name = "id_usuario")
-    )
-    private List<Usuario> usuarios;
+    @OneToMany(mappedBy = "biblioteca")
+    private List<UsuarioBiblioteca> usuarioBibliotecas;
 }

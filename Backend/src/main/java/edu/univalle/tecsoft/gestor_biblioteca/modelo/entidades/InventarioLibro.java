@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Inventario_Libro")
 @Data
@@ -35,4 +37,10 @@ public class InventarioLibro {
 
     @Column(name = "activo", nullable = false, columnDefinition = "BIT DEFAULT 1")
     private Boolean activo;
+
+    @OneToMany(mappedBy = "inventarioLibro")
+    private List<SolicitudPrestamo> solicitudesPrestamo;
+
+    @OneToMany(mappedBy = "inventarioLibro")
+    private List<Prestamo> prestamos;
 }

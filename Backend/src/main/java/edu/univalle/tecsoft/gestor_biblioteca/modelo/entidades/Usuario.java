@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -41,21 +40,11 @@ public class Usuario {
     @Column(name = "activo", nullable = false, columnDefinition = "BIT DEFAULT 1")
     private Boolean activo;
 
-    @ManyToMany
-    @JoinTable(
-            name = "Usuario_Rol",
-            joinColumns = @JoinColumn(name = "id_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "id_rol")
-    )
-    private List<Rol> roles;
+    @OneToMany(mappedBy = "usuario")
+    private List<UsuarioRol> usuarioRoles;
 
-    @ManyToMany
-    @JoinTable(
-            name = "Usuario_Biblioteca",
-            joinColumns = @JoinColumn(name = "id_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "id_biblioteca")
-    )
-    private List<Biblioteca> bibliotecas;
+    @OneToMany(mappedBy = "usuario")
+    private List<UsuarioBiblioteca> usuarioBibliotecas;
 
     @OneToMany(mappedBy = "usuario")
     private List<SolicitudPrestamo> solicitudesPrestamo;

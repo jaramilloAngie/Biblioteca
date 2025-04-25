@@ -10,15 +10,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(UsuarioRolId.class)
 public class UsuarioRol {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario_rol")
+    private Integer idUsuarioRol;
+
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "id_rol", nullable = false)
     private Rol rol;

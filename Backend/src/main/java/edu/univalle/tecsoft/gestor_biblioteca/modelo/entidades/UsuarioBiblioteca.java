@@ -4,21 +4,25 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "Usuario_Biblioteca")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(UsuarioBibliotecaId.class)
+@ToString
 public class UsuarioBiblioteca {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario_biblioteca")
+    private Integer idUsuarioBiblioteca;
+
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "id_biblioteca", nullable = false)
     private Biblioteca biblioteca;

@@ -10,15 +10,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(RolPermisoId.class)
 public class RolPermiso {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_rol_permiso")
+    private Integer idRolPermiso;
+
     @ManyToOne
     @JoinColumn(name = "id_rol", nullable = false)
     private Rol rol;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "id_permiso", nullable = false)
     private Permiso permiso;

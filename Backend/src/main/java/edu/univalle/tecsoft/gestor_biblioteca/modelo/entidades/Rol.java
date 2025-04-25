@@ -27,14 +27,9 @@ public class Rol {
     @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
 
-    @ManyToMany(mappedBy = "roles")
-    private List<Usuario> usuarios;
+    @OneToMany(mappedBy = "rol")
+    private List<UsuarioRol> usuarioRoles;
 
-    @ManyToMany
-    @JoinTable(
-            name = "Rol_Permiso",
-            joinColumns = @JoinColumn(name = "id_rol"),
-            inverseJoinColumns = @JoinColumn(name = "id_permiso")
-    )
-    private List<Permiso> permisos;
+    @OneToMany(mappedBy = "rol")
+    private List<RolPermiso> rolPermisos;
 }

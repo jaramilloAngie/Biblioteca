@@ -27,6 +27,6 @@ public class Permiso {
     @Column(name = "accion", nullable = false)
     private String accion;
 
-    @ManyToMany(mappedBy = "permisos")
-    private List<Rol> roles;
+    @OneToMany(mappedBy = "permiso")
+    private List<RolPermiso> rolPermisos;
 }
