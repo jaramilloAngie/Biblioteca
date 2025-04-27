@@ -1,20 +1,60 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import LoginView from '../views/auth/LoginView.vue';
+import InitView from '../views/init/InitView.vue';
+//import LibrosView from '../views/LibrosView.vue';
+//import UsuariosView from '../views/UsuariosView.vue';
+//import ConfiguracionView from '../views/ConfiguracionView.vue';
+//import LibrosView from '../views/LibrosView.vue';
+//import PrestamosView from '../views/PrestamosView.vue';
+import Layout from '../layout/Layout.vue';
 
 const routes = [
     {
         path: '/login',
         name: 'Login',
-        component: () => import('../views/pages/auth/Login.vue')
+        component: LoginView
     },
     {
         path: '/',
         redirect: '/login'
-    }
+    },
+    {
+        path: '/inicio',
+        name: 'Inicio',
+        component: InitView,
+        meta: { requiresAuth: true, layout: 'main' }
+    },
+    //{
+        //path: '/configuracion',
+        //name: 'Configuracion',
+        //component: ConfiguracionView,
+        //meta: { requiresAuth: true, layout: 'main', roles: ['admin'] }
+    //},
+    //{
+        //path: '/libros',
+        //name: 'Libros',
+        //component: LibrosView,
+        //meta: { requiresAuth: true, layout: 'main', roles: ['usuario'] }
+    //},
+    //{
+        //path: '/prestamos',
+        //name: 'Prestamos',
+        //component: PrestamosView,
+        //meta: { requiresAuth: true, layout: 'main', roles: ['usuario'] }
+    //}
 ];
 
 const router = createRouter({
     history: createWebHistory(),
     routes
 });
+
+router.beforeEach((to, from, next) => {
+    next();
+});
+
+function getUserRole() {
+    return localStorage.getItem('userRole');
+}
 
 export default router;
