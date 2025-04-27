@@ -1,22 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Login from '../views/pages/auth/Login.vue';
 
 const routes = [
     {
         path: '/login',
         name: 'Login',
-        component: Login
-    },    
-    //{
-        //path: '/recuperar-contrasena',
-       //name: 'RecuperarContrasena',
-        //component: () => import('../views/RecuperarContrasena.vue')
-    //},
-    //{
-        //path: '/registro',
-        //name: 'Registro',
-        //component: () => import('../views/Registro.vue')
-    //},
+        component: () => import('../views/pages/auth/Login.vue')
+    },
     {
         path: '/',
         redirect: '/login'
