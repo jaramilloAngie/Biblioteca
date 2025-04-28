@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import Topbar from '../../layout/Topbar.vue'; 
+import Topbar from '../../layout/Topbar.vue';
 
 const email = ref('');
 const password = ref('');
@@ -69,7 +69,7 @@ const login = async () => {
             </div>
             <div class="mt-4 text-center">
                 <span class="text-gray-600 text-1xl">¿No tienes una cuenta?
-                    <router-link to="" class="font-semibold underline text-blue-500 text-1xl hover:text-blue-800">
+                    <router-link to="/registro" class="font-semibold underline text-blue-500 text-1xl hover:text-blue-800">
                         Crea una
                     </router-link>
                 </span>

@@ -17,25 +17,25 @@ const generateMenu = (role) => {
     menuItems.value = [];
     if (role === 'administrador') {
         menuItems.value.push(
-            { label: 'Inicio', icon: 'pi pi-fw pi-home', to: '/inicio' },
+            { label: 'Inicio', icon: 'pi pi-fw pi-objects-column', to: '/inicio' },
             { label: 'Libros', icon: 'pi pi-fw pi-book', to: '/libros' },
             { label: 'Usuarios', icon: 'pi pi-fw pi-users', to: '/usuarios' },
-            { label: 'Prestamos', icon: 'pi pi-fw pi-inbox', to: '/prestamos' },
+            { label: 'Prestamos', icon: 'pi pi-fw pi-arrow-right-arrow-left', to: '/prestamos' },
             { label: 'Configuración', icon: 'pi pi-fw pi-cog', to: '/configuracion' }
         );
     } else if (role === 'bibliotecario') {
         menuItems.value.push(
-            { label: 'Inicio', icon: 'pi pi-fw pi-home', to: '/inicio' },
-            { label: 'Libros', icon: 'pi pi-fw pi-list', to: '/libros' },
+            { label: 'Inicio', icon: 'pi pi-fw pi-objects-column', to: '/inicio' },
+            { label: 'Libros', icon: 'pi pi-fw pi-book', to: '/libros' },
             { label: 'Usuarios', icon: 'pi pi-fw pi-users', to: '/usuarios' },
-            { label: 'Prestamos', icon: 'pi pi-fw pi-inbox', to: '/prestamos' }
+            { label: 'Prestamos', icon: 'pi pi-fw pi-arrow-right-arrow-left', to: '/prestamos' }
         );
     } else if (role === 'usuario') {
         menuItems.value.push(
-            { label: 'Inicio', icon: 'pi pi-fw pi-home', to: '/inicio' },
-            { label: 'Libros', icon: 'pi pi-fw pi-list', to: '/libros' },
-            { label: 'Prestamos', icon: 'pi pi-fw pi-inbox', to: '/prestamos' },
-            { label: 'Perfil', icon: '', to: '/perfil' }
+            { label: 'Inicio', icon: 'pi pi-fw pi-objects-column', to: '/inicio' },
+            { label: 'Libros', icon: 'pi pi-fw pi-book', to: '/libros' },
+            { label: 'Prestamos', icon: 'pi pi-fw pi-arrow-right-arrow-left', to: '/prestamos' },
+            { label: 'Perfil', icon: 'pi pi-fw pi-user', to: '/perfil' }
         );
     }
 };
@@ -48,12 +48,12 @@ const navigate = (item) => {
 </script>
 
 <template>
-    <div class="w-64 bg-gray-200 h-full p-4">
+    <div class="w-1/5 bg-[#C9A66B] h-full p-4">
         <ul class="list-none p-0 m-0">
             <li v-for="item in menuItems" :key="item.to" class="mb-2">
                 <button
                     @click="navigate(item)"
-                    class="flex items-center w-full p-3 rounded-md hover:bg-gray-300 transition-colors duration-200"
+                    class="flex items-center w-full p-3 rounded-md text-2xl font-bold hover:bg-[#f0e9d9] transition-colors duration-200"
                 >
                     <i :class="[item.icon, 'mr-2']"></i>
                     <span>{{ item.label }}</span>
