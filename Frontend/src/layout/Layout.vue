@@ -6,24 +6,21 @@ import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-
-// isAuthenticated ahora es una computed property que depende de la ruta actual
 const isAuthenticated = computed(() => route.meta.requiresAuth !== undefined ? route.meta.requiresAuth : false);
 </script>
 
 <template>
     <div class="layout-container">
-        <div v-if="isAuthenticated">
+        <div v-if="isAuthenticated" class="h-screen flex flex-col">
             <Topbar />
-            <div class="layout-main-sidebar">
-                <Menu />
-                <div class="layout-main-content">
+            <div class="flex flex-row flex-grow">
+                <Menu class="h-full" />
+                <div class="layout-main-content flex flex-col flex-grow overflow-y-auto">
                     <router-view />
-                </div>
+                    <Footer class="mt-6" /> </div>
             </div>
-            <Footer />
         </div>
-        <router-view v-else />
+        <router-view v-else class="h-screen" />
     </div>
 </template>
 
@@ -34,13 +31,11 @@ const isAuthenticated = computed(() => route.meta.requiresAuth !== undefined ? r
     flex-direction: column;
 }
 
-.layout-main-sidebar {
-    display: flex;
-    flex-grow: 1;
-}
-
 .layout-main-content {
+    display: flex;
+    flex-direction: column; /* Para apilar router-view y Footer verticalmente */
     flex-grow: 1;
     padding: 20px;
+    overflow-y: auto;
 }
 </style>

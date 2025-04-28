@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import LoginView from '../views/auth/LoginView.vue';
+import RegistroView from '../views/auth/RegistroView.vue';
 import InitView from '../views/init/InitView.vue';
 //import LibrosView from '../views/LibrosView.vue';
 //import UsuariosView from '../views/UsuariosView.vue';
@@ -17,6 +18,11 @@ const routes = [
     {
         path: '/',
         redirect: '/login'
+    },
+    {
+        path: '/registro',
+        name: 'Registro',
+        component: RegistroView
     },
     {
         path: '/inicio',
