@@ -1,6 +1,7 @@
 <script setup>
 import Topbar from './Topbar.vue';
 import Menu from './Menu.vue';
+import Footer from './Footer.vue';
 import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -20,6 +21,7 @@ const isAuthenticated = computed(() => route.meta.requiresAuth !== undefined ? r
                     <router-view />
                 </div>
             </div>
+            <Footer />
         </div>
         <router-view v-else />
     </div>
