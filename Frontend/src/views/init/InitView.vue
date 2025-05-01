@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import Graphic from './Graphics.vue'
 
 const router = useRouter();
 const menuItems = ref([]);
@@ -31,7 +32,7 @@ const navigate = (item) => {
 </script>
 
 <template>
-    <div class="w-full bg-[#C9A66B] h-full p-4">
+    <div class="w-full  h-full p-4">
         <div class="header flex items-center">
             <i class="pi pi-fw pi-objects-column" style="font-size:40px"></i>
             <label class="p-3" for="header"><b>Dashboard</b></label>
@@ -39,14 +40,16 @@ const navigate = (item) => {
         <ul class="flex flex-row gap-2 p-5 m-0 w-full">
             <li v-for="item in menuItems" :key="item.to" class="mb-2 w-full">
                 <button @click="navigate(item)"
-                    class="bg-[#EFE7D9] flex items-center p-3 rounded-md text-2xl hover:bg-[#f0e9d9] transition-colors duration-200 w-full h-full">
+                    class="bg-[#EFE7D9] flex items-center p-3 rounded-md text-2xl hover:bg-[#8a8a8a] transition-colors duration-200 w-full h-full cursor-pointer">
                     <i :class="[item.icon, 'mr-2']" style="font-size:30px"></i>
                     <span>{{ item.label }}</span>
                 </button>
             </li>
         </ul>
-        <div class="bg-amber-50 max-h-full">
-            <label >AQUI IRA LA GRAFICA</label>
+        <div class="max-h-full">
+            <div>
+                <Graphic></Graphic>
+            </div>
         </div>
     </div>
 </template>
