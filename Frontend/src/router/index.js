@@ -28,7 +28,8 @@ const routes = [
         path: '/inicio',
         name: 'Inicio',
         component: InitView,
-        meta: { requiresAuth: true, layout: 'main' }
+        meta: { requiresAuth: true, layout: 'main' },
+        props: true
     },
     //{
         //path: '/configuracion',
