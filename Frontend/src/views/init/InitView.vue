@@ -1,7 +1,8 @@
 <script setup>
 
 //import InitAdmin from './InitAdminView.vue'
-import InitUser from './InitUserView.vue'
+//import InitUser from './InitUserView.vue'
+import InitLibrarian from './InitLibrarianView.vue';
 
 /*export default {
   props: ['role']
@@ -13,7 +14,7 @@ import InitUser from './InitUserView.vue'
 
 <template>
     <div>
-        <InitUser/>
+        <InitLibrarian/>
     </div>
 </template>
 
