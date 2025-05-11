@@ -10,6 +10,7 @@ import CatalogBooks from '../books/CatalogBooks.vue';
 }*/
 
 // <InitAdmin v-if="role === 'administrador'" />
+// <InitAdmin/>
 
 </script>
 

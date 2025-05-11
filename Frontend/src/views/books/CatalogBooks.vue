@@ -47,7 +47,7 @@ const getBooks = () => {
                 <i class="pi pi-plus" style="font-size:25px"></i>
             </button>
         </div>
-        <div class="bg-amber-50 grid grid-cols-5 gap-4 mt-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-10 p-4">
             <div v-for="(item, index) in books" :key="index" class="p-4">
                 <div class="flex flex-col">
                     <i class="pi pi-pencil ml-auto cursor-pointer " style="font-size:25px"></i>
