@@ -52,7 +52,7 @@ const getBooks = () => {
                 <div class="flex flex-col">
                     <i class="pi pi-pencil ml-auto cursor-pointer " style="font-size:25px"></i>
                 </div>
-                <img :src="item.book" alt="Imagen"  class="mx-auto mt-2" />
+                <img :src="item.book" alt="Imagen"  class="mx-auto mt-2 w-32 h-40 object-cover rounded" />
             </div>
         </div>
 
