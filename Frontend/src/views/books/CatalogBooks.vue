@@ -4,6 +4,8 @@ import { ref, onMounted } from 'vue';
 
 const books = ref([]);
 
+const isNotUser = false;
+
 onMounted(() => {
     //const loggedInUserInfo = { role: 'admin', name: 'Admin User' };
     //userRole.value = loggedInUserInfo.role;
@@ -42,17 +44,17 @@ const getBooks = () => {
             </div>
             <input placeholder="Filtrar" type="filter_book" id="filter_book"
                 class="header bg-[#EFE7D9] shadow appearance-none border-none rounded w-3xs py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-            <button class="header items-end  ml-auto p-3 rounded-md text-2xl h-full cursor-pointer">
+            <button v-if="isNotUser" class="header items-end  ml-auto p-3 rounded-md text-2xl h-full cursor-pointer">
                 <label class="p-3 cursor-pointer" for="header">Agregar libro</label>
                 <i class="pi pi-plus" style="font-size:25px"></i>
             </button>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-10 p-4">
             <div v-for="(item, index) in books" :key="index" class="p-4">
-                <div class="flex flex-col">
+                <div v-if="isNotUser" class="flex flex-col">
                     <i class="pi pi-pencil ml-auto cursor-pointer " style="font-size:25px"></i>
                 </div>
-                <img :src="item.book" alt="Imagen"  class="mx-auto mt-2 w-32 h-40 object-cover rounded" />
+                <img :src="item.book" alt="Imagen"  class="mx-auto mt-2 w-32 h-40 object-cover rounded cursor-pointer" />
             </div>
         </div>
 

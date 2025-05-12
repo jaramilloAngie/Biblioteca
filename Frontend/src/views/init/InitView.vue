@@ -3,7 +3,8 @@
 //import InitAdmin from './InitAdminView.vue'
 //import InitUser from './InitUserView.vue'
 //import InitLibrarian from './InitLibrarianView.vue';
-import CatalogBooks from '../books/CatalogBooks.vue';
+//import CatalogBooks from '../books/CatalogBooks.vue';
+import LoanRegistration from '../loans/LoanRegistrationView.vue';
 
 /*export default {
   props: ['role']
@@ -16,7 +17,7 @@ import CatalogBooks from '../books/CatalogBooks.vue';
 
 <template>
     <div>
-        <CatalogBooks/>
+        <LoanRegistration/>
     </div>
 </template>
 

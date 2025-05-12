@@ -9,7 +9,7 @@ const userRole = ref(null);
 onMounted(() => {
     //const loggedInUserInfo = { role: 'admin', name: 'Admin User' };
     //userRole.value = loggedInUserInfo.role;
-    userRole.value = 'administrador';
+    userRole.value = 'usuario';
     generateMenu(userRole.value);
 });
 
@@ -21,14 +21,15 @@ const generateMenu = (role) => {
             { label: 'Libros', icon: 'pi pi-fw pi-book', to: '/libros' },
             { label: 'Usuarios', icon: 'pi pi-fw pi-users', to: '/usuarios' },
             { label: 'Prestamos', icon: 'pi pi-fw pi-arrow-right-arrow-left', to: '/prestamos' },
-            { label: 'Configuración', icon: 'pi pi-fw pi-cog', to: '/configuracion' }
+            { label: 'Perfil', icon: 'pi pi-fw pi-user', to: '/perfil' }
         );
     } else if (role === 'bibliotecario') {
         menuItems.value.push(
             { label: 'Inicio', icon: 'pi pi-fw pi-objects-column', to: '/inicio' },
             { label: 'Libros', icon: 'pi pi-fw pi-book', to: '/libros' },
             { label: 'Usuarios', icon: 'pi pi-fw pi-users', to: '/usuarios' },
-            { label: 'Prestamos', icon: 'pi pi-fw pi-arrow-right-arrow-left', to: '/prestamos' }
+            { label: 'Prestamos', icon: 'pi pi-fw pi-arrow-right-arrow-left', to: '/prestamos' },
+            { label: 'Perfil', icon: 'pi pi-fw pi-user', to: '/perfil' }
         );
     } else if (role === 'usuario') {
         menuItems.value.push(
