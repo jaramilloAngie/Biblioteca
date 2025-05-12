@@ -12,12 +12,13 @@ const isAuthenticated = computed(() => route.meta.requiresAuth !== undefined ? r
 <template>
     <div class="layout-container">
         <div v-if="isAuthenticated" class="h-screen flex flex-col">
-            <Topbar />
-            <div class="flex flex-row flex-grow">
-                <Menu class="h-full" />
+            <Topbar class="shadow" />
+            <div class="flex flex-row flex-grow overflow-hidden">
+                <Menu class="h-full overflow-hidden" />
                 <div class="layout-main-content flex flex-col flex-grow overflow-y-auto">
                     <router-view />
-                    <Footer class="mt-6" /> </div>
+                    <Footer class="mt-6" />
+                </div>
             </div>
         </div>
         <router-view v-else class="h-screen" />
@@ -33,7 +34,8 @@ const isAuthenticated = computed(() => route.meta.requiresAuth !== undefined ? r
 
 .layout-main-content {
     display: flex;
-    flex-direction: column; /* Para apilar router-view y Footer verticalmente */
+    flex-direction: column;
+    /* Para apilar router-view y Footer verticalmente */
     flex-grow: 1;
     padding: 20px;
     overflow-y: auto;
