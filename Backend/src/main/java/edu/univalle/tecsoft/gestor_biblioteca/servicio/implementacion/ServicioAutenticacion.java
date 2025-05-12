@@ -9,18 +9,21 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ServicioAutenticacion {
 
     private final AuthenticationManager authenticationManager;
-    private final UsuarioServicio usuarioServicio; // Inyecta UsuarioServicio
+    private final UsuarioServicio usuarioServicio;
     private final JwtUtil jwtUtil;
 
     @Autowired
@@ -40,7 +43,11 @@ public class ServicioAutenticacion {
                     new UsernamePasswordAuthenticationToken(correo, contraseña)
             );
         } catch (BadCredentialsException e) {
-            throw new BadCredentialsException("Credenciales incorrectas: ", e);
+            Optional<Usuario> usuarioOptional = usuarioServicio.buscarPorCorreo(correo);
+            String mensajeError = usuarioOptional.isPresent() ? "La contraseña es incorrecta." : "El correo electrónico ingresado no existe.";
+            return new AuthResponse(correo, mensajeError, false, null, null, null);
+        } catch (UsernameNotFoundException e) {
+            return new AuthResponse(correo, "El correo electrónico ingresado no existe.", false, null, null, null);
         }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -55,6 +62,16 @@ public class ServicioAutenticacion {
 
         String accessToken = jwtUtil.createToken(authentication);
 
-        return new AuthResponse(correo, "Inicio de sesión satisfactorio", true, accessToken);
+        List<String> roles = authentication.getAuthorities().stream()
+                .filter(auth -> auth.getAuthority().startsWith("ROLE_"))
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+
+        List<String> permisos = authentication.getAuthorities().stream()
+                .filter(auth -> !auth.getAuthority().startsWith("ROLE_"))
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+
+        return new AuthResponse(correo, "Inicio de sesión satisfactorio", true, accessToken, roles, permisos);
     }
 }
