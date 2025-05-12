@@ -21,21 +21,18 @@ public class Biblioteca {
     @Column(name = "id_biblioteca")
     private Integer idBiblioteca;
 
-    @Column(name = "nombre_biblioteca", unique = true, nullable = false)
+    @Column(name = "nombre_biblioteca", nullable = false, unique = true)
     private String nombreBiblioteca;
 
-    @Column(name = "direccion")
-    private String direccion;
+    @Column(name = "nit", unique = true)
+    private String nit;
 
-    @Column(name = "ciudad")
-    private String ciudad;
+    @Column(name = "nombre_responsable")
+    private String nombreResponsable;
 
-    @Column(name = "pais")
-    private String pais;
+    @Column(name = "documento_responsable", unique = true)
+    private String documentoResponsable;
 
-    @OneToMany(mappedBy = "biblioteca")
-    private List<InventarioLibro> inventarios;
-
-    @OneToMany(mappedBy = "biblioteca")
-    private List<UsuarioBiblioteca> usuarioBibliotecas;
+    @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Sede> sedes;
 }

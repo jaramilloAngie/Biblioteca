@@ -28,27 +28,28 @@ public class Usuario {
     @Column(name = "apellido", nullable = false)
     private String apellido;
 
-    @Column(name = "correo", unique = true, nullable = false)
+    @Column(name = "correo", nullable = false, unique = true)
     private String correo;
 
     @Column(name = "contraseña", nullable = false)
     private String contraseña;
 
-    @Column(name = "fecha_registro", columnDefinition = "DATETIME DEFAULT GETDATE()")
-    private LocalDateTime fechaRegistro;
+    @Column(name = "fecha_registro")
+    private LocalDateTime fechaRegistro = LocalDateTime.now();
 
-    @Column(name = "activo", nullable = false, columnDefinition = "BIT DEFAULT 1")
-    private Boolean activo;
+    @Column(name = "activo", nullable = false)
+    private boolean activo = true;
 
-    @OneToMany(mappedBy = "usuario")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_sede", nullable = false)
+    private Sede sede;
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<UsuarioRol> usuarioRoles;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<UsuarioBiblioteca> usuarioBibliotecas;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<SolicitudPrestamo> solicitudPrestamos;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<SolicitudPrestamo> solicitudesPrestamo;
-
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Prestamo> prestamos;
 }

@@ -21,17 +21,17 @@ public class SolicitudPrestamo {
     @Column(name = "id_solicitud")
     private Integer idSolicitud;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_inventario_libro", referencedColumnName = "id_inventario_libro", nullable = false)
-    private InventarioLibro inventarioLibro;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_libro_sede", nullable = false)
+    private LibroSede libroSede;
 
-    @Column(name = "fecha_solicitud", columnDefinition = "DATETIME DEFAULT GETDATE()")
-    private LocalDateTime fechaSolicitud;
+    @Column(name = "fecha_solicitud")
+    private LocalDateTime fechaSolicitud = LocalDateTime.now();
 
-    @Column(name = "estado_solicitud", nullable = false, length = 20)
-    private String estadoSolicitud;
+    @Column(name = "estado_solicitud", nullable = false)
+    private String estadoSolicitud; // "Pendiente", "Aprobada", "Rechazada", "Cancelada"
 }
