@@ -2,25 +2,16 @@
 
 import { ref, onMounted } from 'vue';
 
+import RecentLoans from '../loans/RecentLoans.vue';
+
 const menuItems = ref([]);
-const recetLoans = ref([]);
 
 onMounted(() => {
     //const loggedInUserInfo = { role: 'admin', name: 'Admin User' };
     //userRole.value = loggedInUserInfo.role;
     generateMenu();
-    getRecentLoans();
 });
 
-const getRecentLoans = () => {
-    recetLoans.value = []
-    recetLoans.value.push(
-        { label: 'El gran Gatsby', label2: 'B.Scott Fitzgeraid Fecha de mayo, 2024' },
-        { label: 'El gran Gatsby', label2: 'B.Scott Fitzgeraid Fecha de mayo, 2024' },
-        { label: 'El gran Gatsby', label2: 'B.Scott Fitzgeraid Fecha de mayo, 2024' },
-        { label: 'El gran Gatsby', label2: 'B.Scott Fitzgeraid Fecha de mayo, 2024' }
-    );
-};
 
 const generateMenu = () => {
     menuItems.value = [];
@@ -68,17 +59,10 @@ const Buscar = () => {
                 </button>
             </div>
         </div>
-        <div>
-            <label class="block text-2xl mb-2 mt-10">
-                Mis préstamos recientes
-            </label>
-            <ul class="gap-2 p-1 m-0 w-full bg-amber-50 ">
-                <li v-for="item in recetLoans" :key="item.to" class="mb-2 w-full flex flex-col">
-                    <label class="font-bold text-2xl">{{ item.label }}</label>
-                    <label class="text-gray-700">{{ item.label2 }}</label>
-                </li>
-            </ul>
-        </div>
+        <label class="block text-2xl mb-2 mt-10">
+            Mis préstamos recientes
+        </label>
+        <RecentLoans />
     </div>
 </template>
 
