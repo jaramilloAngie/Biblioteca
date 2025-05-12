@@ -1,28 +1,23 @@
 package edu.univalle.tecsoft.gestor_biblioteca.controlador;
 
-import edu.univalle.tecsoft.gestor_biblioteca.modelo.entidades.Usuario;
-import edu.univalle.tecsoft.gestor_biblioteca.servicio.interfaces.IUsuarioServicio;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import edu.univalle.tecsoft.gestor_biblioteca.dto.AuthResponse;
+import edu.univalle.tecsoft.gestor_biblioteca.servicio.implementacion.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
-@CrossOrigin(value = "http://localhost:5173")
+@RequestMapping("/usuarios")
 public class UsuarioControlador {
-    private static final Logger logger = LoggerFactory.getLogger(UsuarioControlador.class);
+
+    private final UsuarioServicio usuarioServicio;
 
     @Autowired
-    private IUsuarioServicio usuarioServicio;
-
-    @GetMapping("/usuarios")
-    public List<Usuario> obtenerUsuarios(){
-        var usuarios = usuarioServicio.listar();
-        usuarios.forEach((usuario -> logger.info(usuario.toString())));
-        return usuarios;
+    public UsuarioControlador(UsuarioServicio usuarioServicio) {
+        this.usuarioServicio = usuarioServicio;
     }
 }
