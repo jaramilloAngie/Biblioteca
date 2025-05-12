@@ -22,7 +22,6 @@ public class UsuarioControlador {
     @GetMapping("/usuarios")
     public List<Usuario> obtenerUsuarios(){
         var usuarios = usuarioServicio.listar();
-        //Obtener la lista que se está iterando en la consola
         usuarios.forEach((usuario -> logger.info(usuario.toString())));
         return usuarios;
     }

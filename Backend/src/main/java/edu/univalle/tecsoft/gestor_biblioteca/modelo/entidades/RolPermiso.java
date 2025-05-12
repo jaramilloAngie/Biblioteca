@@ -4,24 +4,28 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "Rol_Permiso")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@IdClass(RolPermisoId.class)
 public class RolPermiso {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_rol_permiso")
-    private Integer idRolPermiso;
-
-    @ManyToOne
-    @JoinColumn(name = "id_rol", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
     private Rol rol;
 
-    @ManyToOne
-    @JoinColumn(name = "id_permiso", nullable = false)
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_permiso", referencedColumnName = "id_permiso")
     private Permiso permiso;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_modulo", referencedColumnName = "id_modulo")
+    private Modulo modulo;
 }

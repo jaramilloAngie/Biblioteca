@@ -21,12 +21,12 @@ public class Permiso {
     @Column(name = "id_permiso")
     private Integer idPermiso;
 
-    @Column(name = "modulo", nullable = false)
-    private String modulo;
+    @Column(name = "nombre_permiso", nullable = false, unique = true)
+    private String nombrePermiso;
 
-    @Column(name = "accion", nullable = false)
-    private String accion;
+    @Column(name = "descripcion")
+    private String descripcion;
 
-    @OneToMany(mappedBy = "permiso")
+    @OneToMany(mappedBy = "permiso", fetch = FetchType.LAZY)
     private List<RolPermiso> rolPermisos;
 }

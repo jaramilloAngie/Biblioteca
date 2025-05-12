@@ -21,16 +21,16 @@ public class Prestamo {
     @Column(name = "id_prestamo")
     private Integer idPrestamo;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_inventario_libro", referencedColumnName = "id_inventario_libro", nullable = false)
-    private InventarioLibro inventarioLibro;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_libro_sede", nullable = false)
+    private LibroSede libroSede;
 
-    @Column(name = "fecha_prestamo", columnDefinition = "DATETIME DEFAULT GETDATE()")
-    private LocalDateTime fechaPrestamo;
+    @Column(name = "fecha_prestamo")
+    private LocalDateTime fechaPrestamo = LocalDateTime.now();
 
     @Column(name = "fecha_devolucion_esperada", nullable = false)
     private LocalDateTime fechaDevolucionEsperada;
@@ -38,6 +38,6 @@ public class Prestamo {
     @Column(name = "fecha_devolucion_real")
     private LocalDateTime fechaDevolucionReal;
 
-    @Column(name = "estado_prestamo", nullable = false, length = 20)
-    private String estadoPrestamo;
+    @Column(name = "estado_prestamo", nullable = false)
+    private String estadoPrestamo; // "Activo", "Devuelto", "Vencido", "Extendido"
 }

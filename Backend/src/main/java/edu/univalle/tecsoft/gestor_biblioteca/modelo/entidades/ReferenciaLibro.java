@@ -9,17 +9,17 @@ import lombok.ToString;
 import java.util.List;
 
 @Entity
-@Table(name = "Libro")
+@Table(name = "Referencia_Libro")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Libro {
+public class ReferenciaLibro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_libro")
-    private Integer idLibro;
+    @Column(name = "id_referencia_libro")
+    private Integer idReferenciaLibro;
 
     @Column(name = "titulo", nullable = false)
     private String titulo;
@@ -33,9 +33,9 @@ public class Libro {
     @Column(name = "año_publicacion")
     private Short añoPublicacion;
 
-    @Column(name = "ISBN", unique = true)
-    private String isbn;
+    @Column(name = "edicion")
+    private String edicion;
 
-    @OneToMany(mappedBy = "libro")
-    private List<InventarioLibro> inventarios;
+    @OneToMany(mappedBy = "referenciaLibro", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<LibroSede> librosSede;
 }
