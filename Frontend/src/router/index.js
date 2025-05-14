@@ -5,8 +5,8 @@ import InitView from '../views/init/InitView.vue';
 //import LibrosView from '../views/LibrosView.vue';
 //import UsuariosView from '../views/UsuariosView.vue';
 //import ConfiguracionView from '../views/ConfiguracionView.vue';
-//import LibrosView from '../views/LibrosView.vue';
-//import PrestamosView from '../views/PrestamosView.vue';
+import LibrosView from '../views/books/CatalogBooks.vue';
+import PrestamosView from '../views/loans/LoanRegistrationView.vue';
 import Layout from '../layout/Layout.vue';
 
 const routes = [
@@ -29,7 +29,7 @@ const routes = [
         name: 'Inicio',
         component: InitView,
         meta: { requiresAuth: true, layout: 'main' },
-        props: true
+        props: { roles: 'usuario' }
     },
     //{
         //path: '/configuracion',
@@ -37,18 +37,20 @@ const routes = [
         //component: ConfiguracionView,
         //meta: { requiresAuth: true, layout: 'main', roles: ['admin'] }
     //},
-    //{
-        //path: '/libros',
-        //name: 'Libros',
-        //component: LibrosView,
-        //meta: { requiresAuth: true, layout: 'main', roles: ['usuario'] }
-    //},
-    //{
-        //path: '/prestamos',
-        //name: 'Prestamos',
-        //component: PrestamosView,
-        //meta: { requiresAuth: true, layout: 'main', roles: ['usuario'] }
-    //}
+    {
+        path: '/libros',
+        name: 'Libros',
+        component: LibrosView,
+        meta: { requiresAuth: true, layout: 'main'},
+        props: { roles: 'bibliotecario' }
+    },
+    {
+        path: '/prestamos',
+        name: 'Prestamos',
+        component: PrestamosView,
+        meta: { requiresAuth: true, layout: 'main'},
+        props: { roles: 'usuario' }
+    }
 ];
 
 const router = createRouter({
