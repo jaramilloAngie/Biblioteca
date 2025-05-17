@@ -4,7 +4,18 @@ import RecentLoans from './RecentLoans.vue';
 
 const today = new Date().toISOString().split('T')[0]
 
-const isUser = true;
+const admin = 'administrador'
+const bibliotecario = 'bibliotecario'
+defineProps(['roles'])
+
+
+const isUser = (rol) => {
+    if (rol === admin || rol === bibliotecario) {
+        return false;
+    }else {
+        return true;
+    }
+}
 
 </script>
 
@@ -14,9 +25,11 @@ const isUser = true;
             <i class="pi pi-fw pi-arrow-right-arrow-left" style="font-size:40px"></i>
             <label class="p-3" for="header"><b>Préstamos</b></label>
         </div>
-        <div v-if="!isUser" class=" bg-[#EFE7D9] flex flex-col">
-            <label class="p-3 py-6 header2 absolute left-1/2"><b>Registrar préstamo</b></label>
-            <div class="mt-18 ml-5 flex flex-col">
+        <div v-if="!isUser(roles)" class=" bg-[#EFE7D9] flex flex-col">
+            <div class="flex justify-center">
+                <label class="p-3 py-6 header2 font-bold">Registrar préstamo</label>
+            </div>
+            <div class="mt-5 ml-5 flex flex-col">
                 <label class="p-3 header"><b>Nombre</b></label>
                 <input id="filter_book"
                     class="header bg-[#D9D9D9] shadow appearance-none border-none rounded w-3xs py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
@@ -41,12 +54,12 @@ const isUser = true;
             </div>
             <div class="mt-8"></div>
         </div>
-        <label v-if="!isUser" class="block text-2xl mb-2 mt-10">
+        <label v-if="!isUser(roles)" class="block text-2xl mb-2 mt-10">
             <b>
                 Préstamos recientes
             </b>
         </label>
-        <label v-if="isUser" class="block text-2xl mb-2 mt-10">
+        <label v-if="isUser(roles)" class="block text-2xl mb-2 mt-10">
             <b>
                 Mis préstamos recientes
             </b>
