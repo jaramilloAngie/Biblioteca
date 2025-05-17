@@ -9,6 +9,8 @@ import LibrosView from '../views/books/CatalogBooks.vue';
 import PrestamosView from '../views/loans/LoanRegistrationView.vue';
 import Layout from '../layout/Layout.vue';
 
+const role = 'bibliotecario'
+
 const routes = [
     {
         path: '/login',
@@ -29,7 +31,7 @@ const routes = [
         name: 'Inicio',
         component: InitView,
         meta: { requiresAuth: true, layout: 'main' },
-        props: { roles: 'usuario' }
+        props: { roles: role }
     },
     //{
         //path: '/configuracion',
@@ -42,14 +44,14 @@ const routes = [
         name: 'Libros',
         component: LibrosView,
         meta: { requiresAuth: true, layout: 'main'},
-        props: { roles: 'bibliotecario' }
+        props: { roles: role }
     },
     {
         path: '/prestamos',
         name: 'Prestamos',
         component: PrestamosView,
         meta: { requiresAuth: true, layout: 'main'},
-        props: { roles: 'usuario' }
+        props: { roles: role }
     }
 ];
 
