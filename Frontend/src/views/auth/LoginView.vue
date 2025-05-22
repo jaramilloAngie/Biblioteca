@@ -41,7 +41,7 @@ const login = async () => {
             localStorage.setItem('token', data.jwt);
             localStorage.setItem('roles', JSON.stringify(data.roles));
             localStorage.setItem('permissions', JSON.stringify(data.permissions));
-            router.push('/inicio');
+            router.push({ path: '/inicio', query: { role: data.roles} });
         } else {
             if (data.mensaje === 'Usuario no encontrado') {
                 showErrorMessage('El correo electrónico ingresado no existe.');

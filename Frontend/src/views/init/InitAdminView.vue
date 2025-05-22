@@ -10,7 +10,7 @@ const userRole = ref(null);
 onMounted(() => {
     //const loggedInUserInfo = { role: 'admin', name: 'Admin User' };
     //userRole.value = loggedInUserInfo.role;
-    userRole.value = 'administrador';
+    userRole.value = 'ROLE_Administrador';
     generateMenu(userRole.value);
 });
 

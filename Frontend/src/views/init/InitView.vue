@@ -1,5 +1,5 @@
 <script setup>
-
+import { useRoute } from 'vue-router';
 import InitAdmin from './InitAdminView.vue'
 import InitUser from './InitUserView.vue'
 import InitLibrarian from './InitLibrarianView.vue';
@@ -14,18 +14,21 @@ import InitLibrarian from './InitLibrarianView.vue';
 // <InitAdmin v-if="role === 'administrador'" />
 // <InitAdmin/>
 
-const admin = 'administrador'
-const bibliotecario = 'bibliotecario'
-const user = 'usuario'
-defineProps(['roles'])
+const route = useRoute();
+
+const role = route.query.role
+
+const admin = 'ROLE_Administrador'
+const bibliotecario = 'ROLE_Bibliotecario'
+const user = 'ROLE_Lector'
 
 </script>
 
 <template>
     <div>
-        <InitAdmin v-if="roles === admin"/>
-        <InitLibrarian v-else-if="roles === bibliotecario"/>
-        <InitUser v-else-if="roles === user"/>
+        <InitAdmin v-if="role === admin"/>
+        <InitLibrarian v-else-if="role === bibliotecario"/>
+        <InitUser v-else-if="role === user"/>
     </div>
 </template>
 

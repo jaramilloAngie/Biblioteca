@@ -30,8 +30,7 @@ const routes = [
         path: '/inicio',
         name: 'Inicio',
         component: InitView,
-        meta: { requiresAuth: true, layout: 'main' },
-        props: { roles: role }
+        meta: { requiresAuth: true, layout: 'main' }
     },
     //{
         //path: '/configuracion',
