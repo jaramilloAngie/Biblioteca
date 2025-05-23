@@ -7,6 +7,7 @@ import InitView from '../views/init/InitView.vue';
 //import ConfiguracionView from '../views/ConfiguracionView.vue';
 import LibrosView from '../views/books/CatalogBooks.vue';
 import PrestamosView from '../views/loans/LoanRegistrationView.vue';
+import RecoverPassword from '../views/auth/RecoverPasswordView.vue';
 import Layout from '../layout/Layout.vue';
 
 const role = 'bibliotecario'
@@ -25,6 +26,11 @@ const routes = [
         path: '/registro',
         name: 'Registro',
         component: RegistroView
+    },
+    {
+        path: '/recuperar_contraseña',
+        name: 'Recuperar_contraseña',
+        component: RecoverPassword
     },
     {
         path: '/inicio',
