@@ -4,7 +4,7 @@ import RegistroView from '../views/auth/RegistroView.vue';
 import InitView from '../views/init/InitView.vue';
 //import LibrosView from '../views/LibrosView.vue';
 import UsuariosView from '../views/users/UsersListView.vue';
-//import ConfiguracionView from '../views/ConfiguracionView.vue';
+import PerfilView from '../views/manage/ProfileView.vue';
 import LibrosView from '../views/books/CatalogBooks.vue';
 import PrestamosView from '../views/loans/LoanRegistrationView.vue';
 import RecoverPassword from '../views/auth/RecoverPasswordView.vue';
@@ -38,12 +38,12 @@ const routes = [
         component: InitView,
         meta: { requiresAuth: true, layout: 'main' }
     },
-    //{
-        //path: '/configuracion',
-        //name: 'Configuracion',
-        //component: ConfiguracionView,
-        //meta: { requiresAuth: true, layout: 'main', roles: ['admin'] }
-    //},
+    {
+        path: '/perfil',
+        name: 'Pefil',
+        component: PerfilView,
+        meta: { requiresAuth: true, layout: 'main', roles: ['admin'] }
+    },
     {
         path: '/libros',
         name: 'Libros',
