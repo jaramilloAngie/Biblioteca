@@ -3,7 +3,7 @@ import LoginView from '../views/auth/LoginView.vue';
 import RegistroView from '../views/auth/RegistroView.vue';
 import InitView from '../views/init/InitView.vue';
 //import LibrosView from '../views/LibrosView.vue';
-//import UsuariosView from '../views/UsuariosView.vue';
+import UsuariosView from '../views/users/UsersListView.vue';
 //import ConfiguracionView from '../views/ConfiguracionView.vue';
 import LibrosView from '../views/books/CatalogBooks.vue';
 import PrestamosView from '../views/loans/LoanRegistrationView.vue';
@@ -48,6 +48,13 @@ const routes = [
         path: '/libros',
         name: 'Libros',
         component: LibrosView,
+        meta: { requiresAuth: true, layout: 'main'},
+        props: { roles: role }
+    },
+    {
+        path: '/usuarios',
+        name: 'Usuarios',
+        component: UsuariosView,
         meta: { requiresAuth: true, layout: 'main'},
         props: { roles: role }
     },
