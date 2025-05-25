@@ -38,6 +38,9 @@ public class SeguridadConfiguracion {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(http -> {
                     http.requestMatchers("/autenticacion/**").permitAll();
+                    http.requestMatchers(HttpMethod.POST, "/usuarios/registrar-lector").permitAll();
+                    http.requestMatchers(HttpMethod.GET, "/sedes").permitAll();
+
                     http.requestMatchers(HttpMethod.GET, "/method/get").hasAuthority("READ");
                     http.requestMatchers(HttpMethod.POST, "/method/post").hasAuthority("CREATE");
                     http.requestMatchers(HttpMethod.DELETE, "/method/delete").hasAuthority("DELETE");
@@ -71,8 +74,7 @@ public class SeguridadConfiguracion {
     }
 
     @Bean
-    @SuppressWarnings("deprecation")
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 }

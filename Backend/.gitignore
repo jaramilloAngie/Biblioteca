@@ -56,7 +56,6 @@ hs_err_pid*
 *.prefs
 *.bak
 *.tgz
-*.properties
 *.gz
 *.original
 *.ldf
@@ -70,4 +69,3 @@ nb-configuration.xml
 .idea/jarRepositories.xml
 .idea/encodings.xml
 .idea/compiler.xml
-*.xml~
