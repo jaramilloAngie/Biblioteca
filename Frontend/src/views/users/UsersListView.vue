@@ -39,7 +39,7 @@ const usuarios = ref([
                 <i class="pi pi-fw pi-users" style="font-size:40px"></i>
                 <label class="p-3" for="header"><b>Usuarios</b></label>
             </div>
-            <input placeholder="Filtrar" type="filter_user" id="filter_user"
+            <input placeholder="Filtrar" type="search" id="filter_user"
                 class="header bg-[#EFE7D9] shadow appearance-none border-none rounded w-4xs py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
 
         </div>
@@ -60,11 +60,10 @@ const usuarios = ref([
                         <td class="border border-gray-300 px-4 py-2">{{ usuario.email }}</td>
                         <td class="border border-gray-300 px-4 py-2">{{ usuario.role }}</td>
                         <td class="border border-gray-300 py-1 flex flex-row justify-center">
-                            <button @click=""
-                                class="cursor-pointer bg-[#C9A66B] hover:bg-amber-600 text-white text-2xl  py-1 px-4 rounded focus:outline-none focus:shadow-outline active:shadow-inner active:scale-95 transition-all duration-100"
-                                type="button">
+                            <router-link to="/manage_profile"
+                                class="inline-block align-baseline font-semibold text-1xl underline text-blue-500 hover:text-blue-800">
                                 Ver perfil
-                            </button>
+                            </router-link>
                         </td>
                     </tr>
                 </tbody>

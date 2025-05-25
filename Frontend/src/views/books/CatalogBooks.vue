@@ -1,6 +1,9 @@
 <script setup>
 
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const books = ref([]);
 
@@ -12,10 +15,18 @@ defineProps(['roles'])
 const isUser = (rol) => {
     if (rol === admin || rol === bibliotecario) {
         return false;
-    }else {
+    } else {
         return true;
     }
 }
+
+const navigate = () => {
+    router.push('/info_book');
+};
+
+const addBook = () => {
+    router.push('/add_book');
+};
 
 onMounted(() => {
     //const loggedInUserInfo = { role: 'admin', name: 'Admin User' };
@@ -54,19 +65,26 @@ const getBooks = () => {
                 <i class="pi pi-fw pi-book" style="font-size:40px"></i>
                 <label class="p-3" for="header"><b>Libros</b></label>
             </div>
-            <input placeholder="Filtrar" type="filter_book" id="filter_book"
-                class="header bg-[#EFE7D9] shadow appearance-none border-none rounded w-3xs py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-            <button v-if="!isUser(roles)" class="header items-end  ml-auto p-3 rounded-md text-2xl h-full cursor-pointer">
+            <input placeholder="Filtrar" type="search" id="filter_book"
+                class="header bg-[#EFE7D9] shadow appearance-none border-none rounded w-4xs py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+            <button v-if="!isUser(roles)" @click="addBook()"
+                class="header items-end  ml-auto p-3 rounded-md text-2xl h-full cursor-pointer">
                 <label class="p-3 cursor-pointer" for="header">Agregar libro</label>
                 <i class="pi pi-plus" style="font-size:25px"></i>
             </button>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-10 p-4">
             <div v-for="(item, index) in books" :key="index" class="p-4">
-                <div v-if="!isUser(roles)" class="flex flex-col">
-                    <i class="pi pi-pencil ml-auto cursor-pointer " style="font-size:25px"></i>
+                <div class="flex flex-col">
+                    <button @click="navigate()" class="ml-auto">
+                        <i v-if="!isUser(roles)" class="pi pi-pencil ml-auto cursor-pointer" style="font-size:25px"></i>
+                        <i v-if="isUser(roles)" class="pi pi-eye ml-auto cursor-pointer" style="font-size:25px"></i>
+                    </button>
                 </div>
-                <img :src="item.book" alt="Imagen" class="mx-auto mt-2 w-32 h-40 object-cover rounded cursor-pointer" />
+                <div>
+                    <img :src="item.book" alt="Imagen"
+                        class="mx-auto mt-2 w-32 h-40 object-cover rounded" />
+                </div>
             </div>
         </div>
 

@@ -29,6 +29,14 @@ import Topbar from '../../layout/Topbar.vue';
                     Recuperar
                 </button>
             </div>
+            <div class="mt-4 text-center">
+                <span class="text-gray-600 text-1xl">Regresar a 
+                    <router-link to="/login"
+                        class="font-semibold underline text-blue-500 text-1xl hover:text-blue-800">
+                        Iniciar sesión
+                    </router-link>
+                </span>
+            </div>
         </div>
     </div>
 </template>

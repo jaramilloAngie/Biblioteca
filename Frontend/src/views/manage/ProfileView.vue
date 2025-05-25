@@ -48,12 +48,10 @@ const onFileChange = (event) => {
             </div>
             <div class="mt-2 ml-5 flex flex-col">
                 <label class="p-1 fields">Rol</label>
-                <select id="Rol" v-model="numeroSeleccionado"
+                <output id="Rol" 
                     class="fields bg-[#D9D9D9] shadow appearance-none border-none rounded w-xl py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    <option disabled value="">Selecciona un rol</option>
-                    <option value="Bibliotecario">Bibliotecario</option>
-                    <option value="Usuario">Lector</option>
-                </select>
+                    Bibliotecario
+                </output>
             </div>
             <div class="flex justify-center">
                 <button class="cursor-pointer bg-[#C9A66B] p-2 rounded text-2xl mt-8 w-2xs">

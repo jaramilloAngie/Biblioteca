@@ -5,12 +5,15 @@ import InitView from '../views/init/InitView.vue';
 //import LibrosView from '../views/LibrosView.vue';
 import UsuariosView from '../views/users/UsersListView.vue';
 import PerfilView from '../views/manage/ProfileView.vue';
+import ManagePerfilView from '../views/manage/ManageUserProfile.vue';
 import LibrosView from '../views/books/CatalogBooks.vue';
+import InfoBook from '../views/books/InfoBook.vue';
+import AddBook from '../views/books/AddBook.vue';
 import PrestamosView from '../views/loans/LoanRegistrationView.vue';
 import RecoverPassword from '../views/auth/RecoverPasswordView.vue';
 import Layout from '../layout/Layout.vue';
 
-const role = 'bibliotecario'
+const role = 'administrador'
 
 const routes = [
     {
@@ -52,6 +55,20 @@ const routes = [
         props: { roles: role }
     },
     {
+        path: '/info_book',
+        name: 'Info_book',
+        component: InfoBook,
+        meta: { requiresAuth: true, layout: 'main'},
+        props: { roles: role }
+    },
+    {
+        path: '/add_book',
+        name: 'Add_book',
+        component: AddBook,
+        meta: { requiresAuth: true, layout: 'main'},
+        props: { roles: role }
+    },
+    {
         path: '/usuarios',
         name: 'Usuarios',
         component: UsuariosView,
@@ -64,7 +81,13 @@ const routes = [
         component: PrestamosView,
         meta: { requiresAuth: true, layout: 'main'},
         props: { roles: role }
-    }
+    },
+    {
+        path: '/manage_profile',
+        name: 'Manage',
+        component: ManagePerfilView,
+        meta: { requiresAuth: true, layout: 'main', roles: ['admin'] }
+    },
 ];
 
 const router = createRouter({
