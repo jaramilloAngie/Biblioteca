@@ -41,7 +41,7 @@ const login = async () => {
             localStorage.setItem('token', data.jwt);
             localStorage.setItem('roles', JSON.stringify(data.roles));
             localStorage.setItem('permissions', JSON.stringify(data.permissions));
-            router.push('/inicio');
+            router.push({ path: '/inicio', query: { role: data.roles} });
         } else {
             if (data.mensaje === 'Usuario no encontrado') {
                 showErrorMessage('El correo electrónico ingresado no existe.');
@@ -96,7 +96,7 @@ const showErrorMessage = (message) => {
                     class="bg-[#EFE7D9] shadow appearance-none border-none rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
             </div>
             <div class="flex items-center justify-between mb-4">
-                <router-link to=""
+                <router-link to="/recuperar_contraseña"
                     class="inline-block align-baseline font-semibold text-1xl underline text-blue-500 hover:text-blue-800">
                     ¿Olvidaste tu contraseña?
                 </router-link>
