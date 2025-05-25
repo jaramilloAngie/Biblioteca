@@ -1,5 +1,5 @@
-import getAxiosInstance from "@/axios/AxiosManager";
-import AuthUrl from "@/url/AuthUrl";
+import getAxiosInstance from "../axios/AxiosManager";
+import AuthUrl from "../url/AuthUrl";
 
 export default {
     async registrarUsuario(userData) {
@@ -7,10 +7,10 @@ export default {
         const registroUrl = await AuthUrl.getRegistroUrl();
         try {
             const response = await axiosInstance.post(registroUrl, userData);
-            return response.data;
+            return { estado: true, mensaje: response.data };
         } catch (error) {
             if (error.response) {
-                return { estado: false, mensaje: error.response.data.mensaje || 'Error al registrar usuario' };
+                return { estado: false, mensaje: error.response.data || 'Error al registrar usuario' };
             } else if (error.request) {
                 return { estado: false, mensaje: 'No se recibió respuesta del servidor' };
             } else {

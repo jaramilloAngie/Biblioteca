@@ -1,9 +1,9 @@
 package edu.univalle.tecsoft.gestor_biblioteca.servicio.implementacion;
 
-import edu.univalle.tecsoft.gestor_biblioteca.modelo.entidades.Permiso;
-import edu.univalle.tecsoft.gestor_biblioteca.modelo.entidades.Rol;
-import edu.univalle.tecsoft.gestor_biblioteca.modelo.entidades.Usuario;
-import edu.univalle.tecsoft.gestor_biblioteca.modelo.entidades.UsuarioRol;
+import edu.univalle.tecsoft.gestor_biblioteca.dto.RegistroRequest;
+import edu.univalle.tecsoft.gestor_biblioteca.modelo.entidades.*;
+import edu.univalle.tecsoft.gestor_biblioteca.repositorio.RolRepositorio;
+import edu.univalle.tecsoft.gestor_biblioteca.repositorio.SedeRepositorio;
 import edu.univalle.tecsoft.gestor_biblioteca.repositorio.UsuarioRepositorio;
 import edu.univalle.tecsoft.gestor_biblioteca.repositorio.UsuarioRolRepositorio;
 import edu.univalle.tecsoft.gestor_biblioteca.servicio.interfaces.IUsuarioServicio;
@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,13 +29,18 @@ public class UsuarioServicio implements IUsuarioServicio, UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final UsuarioRepositorio usuarioRepositorio;
     private final UsuarioRolRepositorio usuarioRolRepositorio;
+    private final RolRepositorio rolRepositorio;
+    private final SedeRepositorio sedeRepositorio;
 
     @Autowired
     public UsuarioServicio(PasswordEncoder passwordEncoder, UsuarioRepositorio usuarioRepositorio,
-                           UsuarioRolRepositorio usuarioRolRepositorio) {
+                           UsuarioRolRepositorio usuarioRolRepositorio, RolRepositorio rolRepositorio,
+                           SedeRepositorio sedeRepositorio) {
         this.passwordEncoder = passwordEncoder;
         this.usuarioRepositorio = usuarioRepositorio;
         this.usuarioRolRepositorio = usuarioRolRepositorio;
+        this.rolRepositorio = rolRepositorio;
+        this.sedeRepositorio = sedeRepositorio;
     }
 
     @Override
@@ -51,6 +57,37 @@ public class UsuarioServicio implements IUsuarioServicio, UserDetailsService {
     public Usuario guardar(Usuario usuario) {
         usuario.setContraseña(passwordEncoder.encode(usuario.getContraseña()));
         return usuarioRepositorio.save(usuario);
+    }
+
+    @Transactional
+    public Usuario registrarLector(String nombre, String apellido, String correo, String contraseña, Integer sedeId) {
+        if (usuarioRepositorio.findByCorreo(correo).isPresent()) {
+            throw new IllegalArgumentException("El correo electrónico ya está registrado.");
+        }
+
+        Rol rolLector = rolRepositorio.findByNombreRol("LECTOR")
+                .orElseThrow(() -> new IllegalStateException("El rol 'LECTOR' no existe en la base de datos."));
+
+        Sede sede = sedeRepositorio.findById(sedeId)
+                .orElseThrow(() -> new IllegalArgumentException("La sede seleccionada no es válida."));
+
+        Usuario nuevoUsuario = new Usuario();
+        nuevoUsuario.setNombre(nombre);
+        nuevoUsuario.setApellido(apellido);
+        nuevoUsuario.setCorreo(correo);
+        nuevoUsuario.setContraseña(passwordEncoder.encode(contraseña));
+        nuevoUsuario.setFechaRegistro(LocalDateTime.now());
+        nuevoUsuario.setActivo(true);
+        nuevoUsuario.setSede(sede);
+
+        Usuario usuarioGuardado = usuarioRepositorio.save(nuevoUsuario);
+
+        UsuarioRol usuarioRol = new UsuarioRol();
+        usuarioRol.setUsuario(usuarioGuardado);
+        usuarioRol.setRol(rolLector);
+        usuarioRolRepositorio.save(usuarioRol);
+
+        return usuarioGuardado;
     }
 
     @Override
