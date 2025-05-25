@@ -96,7 +96,7 @@ const showErrorMessage = (message) => {
                     class="bg-[#EFE7D9] shadow appearance-none border-none rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
             </div>
             <div class="flex items-center justify-between mb-4">
-                <router-link to=""
+                <router-link to="/recuperar_contraseña"
                     class="inline-block align-baseline font-semibold text-1xl underline text-blue-500 hover:text-blue-800">
                     ¿Olvidaste tu contraseña?
                 </router-link>
